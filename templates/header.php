@@ -1,3 +1,11 @@
+<?php
+
+use Model\Categorie\Categorie;
+
+# Récupération des catégories de la BDD
+$categorieModel = new Categorie();
+$categories = $categorieModel->findAll();
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -25,11 +33,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?= PUBLIC_URL ?>">Accueil <span class="sr-only">(current)</span></a>
             </li>
-            <?php foreach (['Politique', 'Economie', 'Sports', 'Culture'] as $categorie) { ?>
+            <?php foreach ($categories as $categorie) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><?= $categorie ?></a>
+                    <a class="nav-link"
+                       href="<?= PUBLIC_URL . '/categorie/' . $categorie['id'] ?>">
+                        <?= $categorie['nom'] ?>
+                    </a>
                 </li>
             <?php } ?>
         </ul>

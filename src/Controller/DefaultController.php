@@ -1,5 +1,11 @@
 <?php
 
+namespace Controller;
+
+use Model\Article\Article;
+use Model\Categorie\Categorie;
+use Model\Db\DbFactory;
+
 
 /**
  * L'Objectif du DefaultController est de s'occuper
@@ -24,11 +30,26 @@ class DefaultController extends AbstractController
     public function home()
     {
 
+        # Récupération de PDO
+        # $pdo = DbFactory::makePdo();
+
         # Récupération des derniers articles de la BDD
-        $pdo = DbFactory::makePdo();
+        # $query = $pdo->query('
+        #     SELECT * FROM article, auteur
+        #       WHERE article.auteur_id = auteur.id
+        #         ORDER BY article.id DESC
+        # ');
+
+        # Récupération des articles
+        # $articles = $query->fetchAll();
+
+        # Récupération des articles v2
+        $articleModel = new Article();
 
         # echo '<h1>JE SUIS LA PAGE ACCUEIL DANS LE CONTROLLER</h1>';
-        $this->render('default/home');
+        $this->render('default/home', [
+            'articles' => $articleModel->findAll()
+        ]);
 
     }
 
@@ -42,7 +63,13 @@ class DefaultController extends AbstractController
         # require_once(__DIR__.'/../../templates/header.php');
         # require_once(__DIR__.'/../../templates/default/categorie.php');
         # require_once(__DIR__.'/../../templates/footer.php');
-        $this->render('default/categorie');
+
+        $categorieDb = new Categorie();
+        $categorie = $categorieDb->findOne($_GET['id']);
+
+        $this->render('default/categorie', [
+            'categorie' => $categorie
+        ]);
     }
 
     /**

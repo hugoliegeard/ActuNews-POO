@@ -1,5 +1,6 @@
 <?php
 
+namespace Controller;
 
 /**
  * Le Controleur en charge de

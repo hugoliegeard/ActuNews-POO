@@ -1,5 +1,15 @@
 <?php
 
+/* --
+ * Ici, ma classe DbFactory est déclarée
+ * dans l'espace Model\Db;
+ * --------------------------
+ * Pour l'utiliser, je devrais dorénavant,
+ * indiquer à PHP son emplacement.
+ -- */
+namespace Model\Db;
+
+use PDO;
 
 /**
  * Une Factory est une classe
@@ -24,9 +34,10 @@ class DbFactory
      * -------------------------------------------
      * @return PDO
      */
-    public static function makePdo()
+    public static function makePdo(): PDO
     {
-        $pdo = new PDO('mysql:host=localhost;dbname=actunews', 'root', '', [
+        $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME,
+            DB_USER, DB_PASS, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);

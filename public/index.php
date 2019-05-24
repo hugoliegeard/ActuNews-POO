@@ -1,10 +1,15 @@
 <?php
 
 # Autochargement des classes
-spl_autoload_register(function ($class) {
-    # echo 'autoload : '. $class . '<br>';
-    require_once '../src/Controller/' . $class . '.php';
-});
+
+use Controller\DefaultController;
+use Controller\MembreController;
+
+# Chargement de l'autoload des classes
+require_once 'autoload.php';
+
+# Chargement de la configuration
+require_once 'config.php';
 
 # require_once '../src/Controller/DefaultController.php';
 # require_once '../src/Controller/MembreController.php';

@@ -1,5 +1,6 @@
 <?php
 
+namespace Controller;
 
 /**
  * AbstractController est ce qu'on appel
@@ -27,7 +28,7 @@ abstract class AbstractController
      * ou encore default/home | default/categorie
      * @param string $page
      */
-    public function render(string $page)
+    protected function render(string $page, array $parameters = [])
     {
         include_once(__DIR__.'/../../templates/header.php');
         include_once(__DIR__.'/../../templates/' . $page . '.php');
