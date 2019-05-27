@@ -12,10 +12,10 @@
             <div class="col-6 col-md">
                 <h5>Catégories</h5>
                 <ul class="list-unstyled">
-                    <?php foreach (['Politique', 'Economie', 'Sports', 'Culture'] as $categorie) { ?>
+                    <?php foreach ($categories as $categorie) { ?>
                         <li>
-                            <a class="text-muted" href="#">
-                                <?= $categorie ?>
+                            <a href="<?= PUBLIC_URL . '/categorie/' . $categorie['id'] ?>">
+                                <?= $categorie['nom'] ?>
                             </a>
                         </li>
                     <?php } ?>

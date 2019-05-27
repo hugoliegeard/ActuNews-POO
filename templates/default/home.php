@@ -1,6 +1,6 @@
 <?php
-    # Récupération des articles dans le tableau
-    $articles = $parameters['articles'];
+# Récupération des articles dans le tableau
+$articles = $parameters['articles'];
 ?>
 
 <div class="p-3 mx-auto text-center">
@@ -18,7 +18,9 @@
                              alt="<?= $article['titre'] ?>">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <?= $article['titre'] ?>
+                                <a href="<?= PUBLIC_URL . '/default/article?id=' . $article['id'] ?>">
+                                    <?= $article['titre'] ?>
+                                </a>
                             </h5>
                             <p class="card-text">
                                 <!-- Accroche de 150 caractère à partir du contenu de l'article  -->

@@ -64,11 +64,27 @@ class DefaultController extends AbstractController
         # require_once(__DIR__.'/../../templates/default/categorie.php');
         # require_once(__DIR__.'/../../templates/footer.php');
 
-        $categorieDb = new Categorie();
-        $categorie = $categorieDb->findOne($_GET['id']);
+        /*
+         * Je souhaite récupérer la catégorie ayant l'ID
+         * passé en paramètre dans mon URL.
+         * ex. print_r( $_GET['id'] );
+         */
 
+        # 1. Je créer une instance de Categorie
+        $categorie = new Categorie();
+
+        # 2. Je créer une instance pour les articles
+        $article = new Article();
+
+        # Aperçu
+        # print_r(
+        #   $categorie->findOne( $_GET['id'] )
+        # );
+
+        # Transmission à la vue
         $this->render('default/categorie', [
-            'categorie' => $categorie
+            'categorie' => $categorie->findOne($_GET['id']),
+            'articles' => $article->findAll('categorie_id = '. $_GET['id'])
         ]);
     }
 
@@ -77,11 +93,14 @@ class DefaultController extends AbstractController
      */
     public function article()
     {
-        # echo '<h1>JE SUIS LA PAGE ARTICLE DANS LE CONTROLLER</h1>';
-        # require_once(__DIR__.'/../../templates/header.php');
-        # require_once(__DIR__.'/../../templates/default/article.php');
-        # require_once(__DIR__.'/../../templates/footer.php');
-        $this->render('default/article');
+
+        # Récupérer un Article via son ID
+        $article = new Article();
+
+        # Transmission à la vue
+        $this->render('default/article', [
+            'article' => $article->findOne($_GET['id'])
+        ]);
     }
 
 }
